@@ -252,19 +252,164 @@ import SwiftUI
 //    }
 //}
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Text("Hello")
-            Spacer().frame(height: 100)
-            Text("World")
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            print("VStack tapped!")
-        }
+//struct ContentView: View {
+//    var body: some View {
+//        VStack {
+//            Text("Hello")
+//            Spacer().frame(height: 100)
+//            Text("World")
+//        }
+//        .contentShape(Rectangle())
+//        .onTapGesture {
+//            print("VStack tapped!")
+//        }
+//    }
+//}
+
+//struct ContentView: View {
+//    let timer = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .common).autoconnect()
+//    @State private var counter = 0
+//    var body: some View {
+//        Text("Hello, World!")
+//            .onReceive(timer) { time in
+//                if counter == 5 {
+//                    timer.upstream.connect().cancel()
+//                } else {
+//                    print("The time is now \(time)")
+//                }
+//
+//                counter += 1
+//            }
+//    }
+//}
+
+//struct ContentView: View {
+//    @Environment(\.scenePhase) var scenePhase
+//    
+//    var body: some View {
+//        Text("Hello, world!")
+//            .padding()
+//            .onChange(of: scenePhase) { newPhase, _ in
+//                if newPhase == .active {
+//                    print("Active")
+//                } else if newPhase == .inactive {
+//                    print("Inactive")
+//                } else if newPhase == .background {
+//                    print("Background")
+//                }
+//            }
+//    }
+//}
+
+//struct ContentView: View {
+//    @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
+//
+//    var body: some View {
+//        HStack {
+//            if differentiateWithoutColor {
+//                Image(systemName: "checkmark.circle")
+//            }
+//                Text("Success")
+//            }
+//            .padding()
+//            .background(differentiateWithoutColor ? .black : .green)
+//            .foregroundColor(.white)
+//            .clipShape(Capsule())
+//        }
+//    }
+
+//struct ContentView: View {
+//    @Environment(\.accessibilityReduceMotion) var reduceMotion
+//    @State private var scale = 1.0
+//
+//    var body: some View {
+//        Text("Hello, World!")
+//            .scaleEffect(scale)
+//            .onTapGesture {
+//                if reduceMotion {
+//                    scale *= 1.5
+//                } else {
+//                    withAnimation {
+//                        scale *= 1.5
+//                    }
+//                }
+//            }
+//    }
+//}
+
+
+//func withOptionalAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result {
+//    if UIAccessibility.isReduceMotionEnabled {
+//        return try body()
+//    } else {
+//        return try withAnimation(animation, body)
+//    }
+//}
+//
+//
+//struct ContentView: View {
+//    @State private var scale = 1.0
+//    
+//    var body: some View {
+//        Text("Hello, World!")
+//            .scaleEffect(scale)
+//            .onTapGesture {
+//                withOptionalAnimation {
+//                    scale *= 1.5
+//                }
+//            }
+//    }
+//}
+
+//struct ContentView: View {
+//    @Environment(\.accessibilityReduceTransparency) var reduceTransparency
+//
+//    var body: some View {
+//        Text("Hello, World!")
+//            .padding()
+//            .background(reduceTransparency ? .black : .black.opacity(0.5))
+//            .foregroundColor(.white)
+//            .clipShape(Capsule())
+//    }
+//}
+
+extension View {
+    func stacked(at position: Int, in total: Int) -> some View {
+        let offset = Double(total - position)
+        return self.offset(y: offset * 10)
     }
 }
+
+
+struct ContentView: View {
+    @State private var cards = Array<Card>(repeating: .example, count: 10)
+    var body: some View {
+        ZStack {
+            Image(.background)
+                .resizable()
+                .ignoresSafeArea()
+            VStack {
+                ZStack {
+                    ForEach(0..<cards.count, id: \.self) { index in
+                        CardView(card: cards[index]) {
+                            withAnimation {
+                               removeCard(at: index)
+                           }
+                        }
+                        .stacked(at: index, in: cards.count)
+                    }
+                }
+            }
+        }
+    }
+    
+    func removeCard(at index: Int) {
+        cards.remove(at: index)
+    }
+
+}
+
+
 
 #Preview {
     ContentView()
