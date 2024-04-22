@@ -10,8 +10,10 @@ import SwiftUI
 struct CardView: View {
     @Environment(\.accessibilityDifferentiateWithoutColor) var accessibilityDifferentiateWithoutColor
     @Environment(\.accessibilityVoiceOverEnabled) var accessibilityVoiceOverEnabled
+    
+    @State private var feedback = UINotificationFeedbackGenerator()
     let card: Card
-    var removal: (() -> Void)? = nil
+    var removal: ((_ isCorrect: Bool) -> Void)? = nil
     @State private var isShowingAnswer = false
     @State private var offset = CGSize.zero
     var body: some View {
@@ -59,10 +61,14 @@ struct CardView: View {
             DragGesture()
                 .onChanged { gesture in
                     offset = gesture.translation
+                    feedback.prepare()
                 }
                 .onEnded { _ in
                     if abs(offset.width) > 100 {
-                        removal?()
+                        if offset.width < 0 {
+                            feedback.notificationOccurred(.error)
+                        }
+                        removal?(offset.width > 0)
                     } else {
                         offset = .zero
                     }
@@ -71,7 +77,7 @@ struct CardView: View {
         .onTapGesture {
             isShowingAnswer.toggle()
         }
-        .animation(.bouncy, value: offset)
+        .animation(.spring, value: offset)
     }
 }
 
