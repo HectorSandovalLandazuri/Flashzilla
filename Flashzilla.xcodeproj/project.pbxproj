@@ -13,6 +13,7 @@
 		A22A4E752B2A28D2004325F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A22A4E742B2A28D2004325F6 /* Preview Assets.xcassets */; };
 		A2A4DA002B88F54C00FBDFED /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4D9FF2B88F54C00FBDFED /* Card.swift */; };
 		A2A4DA022B88F78C00FBDFED /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4DA012B88F78C00FBDFED /* CardView.swift */; };
+		A2F7DBD12BD6EDAA00676C66 /* EditCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F7DBD02BD6EDAA00676C66 /* EditCards.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		A22A4E742B2A28D2004325F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A2A4D9FF2B88F54C00FBDFED /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		A2A4DA012B88F78C00FBDFED /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		A2F7DBD02BD6EDAA00676C66 /* EditCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCards.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				A2A4DA012B88F78C00FBDFED /* CardView.swift */,
 				A22A4E712B2A28D2004325F6 /* Assets.xcassets */,
 				A22A4E732B2A28D2004325F6 /* Preview Content */,
+				A2F7DBD02BD6EDAA00676C66 /* EditCards.swift */,
 			);
 			path = Flashzilla;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				A22A4E702B2A28D0004325F6 /* ContentView.swift in Sources */,
 				A2A4DA002B88F54C00FBDFED /* Card.swift in Sources */,
 				A2A4DA022B88F78C00FBDFED /* CardView.swift in Sources */,
+				A2F7DBD12BD6EDAA00676C66 /* EditCards.swift in Sources */,
 				A22A4E6E2B2A28D0004325F6 /* FlashzillaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
